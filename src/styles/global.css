@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --color-nbb-green: #2c4539;
+  --color-nbb-gold: #f8bd52;
+  --color-nbb-cream: #f3e2ba;
+  --color-nbb-teal: #709395;
+  --color-nbb-white: #fffdfa;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
+}

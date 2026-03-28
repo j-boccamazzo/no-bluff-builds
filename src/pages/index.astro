@@ -1,11 +1,178 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Placeholder testimonials — will come from Airtable later
+const testimonials = [
+  {
+    name: "Sarah Mitchell",
+    business: "Mitchell's Florist, Albany",
+    quote: "I had no idea how many locals were looking for a florist online. Within a month of my listing going live, I had three new regular customers."
+  },
+  {
+    name: "Dave Kowalski",
+    business: "Kowalski Plumbing, Denmark",
+    quote: "Josh set everything up and I didn't have to lift a finger. Now when people search for a plumber in Denmark, they find me."
+  },
+  {
+    name: "Trish Nguyen",
+    business: "Great Southern Yoga, Mount Barker",
+    quote: "The listing looks more professional than my old website ever did. And it cost me nothing to get started."
+  }
+];
+
+const tiers = [
+  {
+    name: "Free Listing",
+    price: "$0",
+    description: "Get your business on the No Bluff Local directory. Locals searching for what you offer will find you.",
+    features: ["Basic directory presence", "Contact details & location", "Live within 48 hours"],
+    cta: "Claim your free listing",
+    highlight: false
+  },
+  {
+    name: "Managed Listing",
+    price: "$50/mth",
+    description: "We set it up and keep it looking sharp. You focus on running your business.",
+    features: ["Everything in Free", "Professional copy & photos", "We handle all updates", "Verified badge"],
+    cta: "Book a chat",
+    highlight: true
+  },
+  {
+    name: "Custom Website",
+    price: "From $500",
+    description: "Your own branded one-page site on your domain. Built to convert locals into customers.",
+    features: ["Everything in Managed", "Custom domain & branding", "Calendly or contact form", "Monthly maintenance"],
+    cta: "Book a chat",
+    highlight: false
+  }
+];
 ---
 
 <Layout>
-	<Welcome />
+  <!-- Nav -->
+  <nav class="px-6 py-4 flex justify-between items-center max-w-5xl mx-auto">
+    <span class="font-display text-xl font-bold text-nbb-green">No Bluff Builds</span>
+    <a href="#book" class="bg-nbb-gold text-nbb-green font-semibold px-4 py-2 rounded-full text-sm hover:brightness-95 transition">
+      Book a chat
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="px-6 py-24 max-w-5xl mx-auto">
+    <p class="text-nbb-teal font-semibold text-sm uppercase tracking-widest mb-4">Web presence for Great Southern businesses</p>
+    <h1 class="font-display text-5xl md:text-6xl font-bold text-nbb-green leading-tight mb-6 max-w-3xl">
+      Locals are searching for you.<br />Can they find you?
+    </h1>
+    <p class="text-lg text-nbb-green/70 max-w-xl mb-8">
+      Most Great Southern businesses have no web presence — or a terrible one. No Bluff Builds fixes that, at whatever level you're ready for.
+    </p>
+    <a href="#book" class="inline-block bg-nbb-gold text-nbb-green font-bold px-8 py-4 rounded-full text-lg hover:brightness-95 transition">
+      Book a free chat →
+    </a>
+  </section>
+
+  <!-- Problem -->
+  <section class="bg-nbb-green px-6 py-20">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-cream mb-4">
+        A bad web presence is costing you customers.
+      </h2>
+      <p class="text-nbb-cream/70 text-lg max-w-2xl">
+        When someone in Albany searches for a plumber, a florist, or a yoga class — and you don't appear — they go to your competitor. Not because you're worse. Because they couldn't find you.
+      </p>
+    </div>
+  </section>
+
+  <!-- Solution -->
+  <section class="px-6 py-24 max-w-5xl mx-auto">
+    <p class="text-nbb-teal font-semibold text-sm uppercase tracking-widest mb-4">The options</p>
+    <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-green mb-12">
+      Start where you're comfortable.
+    </h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      {tiers.map((tier) => (
+        <div class={`rounded-2xl p-8 flex flex-col ${tier.highlight ? 'bg-nbb-green text-nbb-cream' : 'bg-nbb-white text-nbb-green border border-nbb-green/10'}`}>
+          <div class="mb-6">
+            <p class={`text-sm font-semibold uppercase tracking-widest mb-2 ${tier.highlight ? 'text-nbb-gold' : 'text-nbb-teal'}`}>{tier.name}</p>
+            <p class={`font-display text-3xl font-bold mb-3 ${tier.highlight ? 'text-nbb-cream' : 'text-nbb-green'}`}>{tier.price}</p>
+            <p class={`text-sm ${tier.highlight ? 'text-nbb-cream/70' : 'text-nbb-green/70'}`}>{tier.description}</p>
+          </div>
+          <ul class="space-y-2 mb-8 flex-grow">
+            {tier.features.map((feature) => (
+              <li class={`text-sm flex items-center gap-2 ${tier.highlight ? 'text-nbb-cream/80' : 'text-nbb-green/80'}`}>
+                <span class={`text-lg ${tier.highlight ? 'text-nbb-gold' : 'text-nbb-teal'}`}>✓</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <a href="#book" class={`text-center font-semibold px-6 py-3 rounded-full text-sm transition ${tier.highlight ? 'bg-nbb-gold text-nbb-green hover:brightness-95' : 'border-2 border-nbb-green text-nbb-green hover:bg-nbb-green hover:text-nbb-cream'}`}>
+            {tier.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="bg-nbb-white px-6 py-24">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-nbb-teal font-semibold text-sm uppercase tracking-widest mb-4">What locals are saying</p>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-green mb-12">
+        Real businesses. Real results.
+      </h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {testimonials.map((t) => (
+          <div class="bg-nbb-cream rounded-2xl p-8">
+            <p class="text-nbb-green/80 text-sm leading-relaxed mb-6">"{t.quote}"</p>
+            <div>
+              <p class="font-semibold text-nbb-green text-sm">{t.name}</p>
+              <p class="text-nbb-teal text-sm">{t.business}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="px-6 py-24 max-w-5xl mx-auto">
+    <p class="text-nbb-teal font-semibold text-sm uppercase tracking-widest mb-4">The process</p>
+    <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-green mb-12">
+      Three steps, then done.
+    </h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      {[
+        { step: "01", title: "Book a chat", desc: "We spend 20 minutes on the phone. I find out what you need and tell you exactly what I'd recommend." },
+        { step: "02", title: "We set it up", desc: "You send me your details and a few photos. I handle the rest — usually live within a week." },
+        { step: "03", title: "Locals find you", desc: "Your listing or site goes live. We check in after 30 days to see how it's going." }
+      ].map((item) => (
+        <div>
+          <p class="font-display text-5xl font-bold text-nbb-gold mb-4">{item.step}</p>
+          <h3 class="font-semibold text-nbb-green text-lg mb-2">{item.title}</h3>
+          <p class="text-nbb-green/70 text-sm leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="book" class="bg-nbb-green px-6 py-24">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-cream mb-4">
+        Ready to get found?
+      </h2>
+      <p class="text-nbb-cream/70 mb-8">
+        Book a free 20-minute chat. No pitch, no pressure — just a straight conversation about what would actually help your business.
+      </p>
+      <!-- Calendly embed will go here -->
+      <a href="#" class="inline-block bg-nbb-gold text-nbb-green font-bold px-8 py-4 rounded-full text-lg hover:brightness-95 transition">
+        Book a free chat →
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="px-6 py-8 text-center text-nbb-green/50 text-sm">
+    <p>© 2025 No Bluff Builds · Part of <a href="https://noblufflocal.com" class="underline hover:text-nbb-green">No Bluff Local</a></p>
+  </footer>
 </Layout>
