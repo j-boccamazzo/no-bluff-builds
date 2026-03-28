@@ -1,24 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getTestimonials } from '../lib/airtable.js';
 
-// Placeholder testimonials — will come from Airtable later
-const testimonials = [
-  {
-    name: "Sarah Mitchell",
-    business: "Mitchell's Florist, Albany",
-    quote: "I had no idea how many locals were looking for a florist online. Within a month of my listing going live, I had three new regular customers."
-  },
-  {
-    name: "Dave Kowalski",
-    business: "Kowalski Plumbing, Denmark",
-    quote: "Josh set everything up and I didn't have to lift a finger. Now when people search for a plumber in Denmark, they find me."
-  },
-  {
-    name: "Trish Nguyen",
-    business: "Great Southern Yoga, Mount Barker",
-    quote: "The listing looks more professional than my old website ever did. And it cost me nothing to get started."
-  }
-];
+const testimonials = await getTestimonials();
 
 const tiers = [
   {
