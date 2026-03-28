@@ -9,11 +9,39 @@ import '../styles/global.css';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Beautiful, low-maintenance web presence for Great Southern businesses." />
+
+    <!-- Primary SEO -->
+    <title>No Bluff Builds | Web Presence for Great Southern Businesses</title>
+    <meta name="description" content="Directory listings and one-page websites for Great Southern businesses. Get found by locals without the agency price tag. Based in Albany, WA." />
+    <link rel="canonical" href="https://noblufflocal.com/builds" />
+
+    <!-- Open Graph (Facebook, iMessage previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://noblufflocal.com/builds" />
+    <meta property="og:title" content="No Bluff Builds | Web Presence for Great Southern Businesses" />
+    <meta property="og:description" content="Directory listings and one-page websites for Great Southern businesses. Get found by locals without the agency price tag." />
+    <meta property="og:image" content="/NBB-Logo-with-text.png" />
+
+    <!-- Schema markup — LocalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "No Bluff Builds",
+        "description": "Directory listings and one-page websites for Great Southern businesses.",
+        "url": "https://noblufflocal.com/builds",
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "Great Southern, Western Australia"
+        },
+        "serviceType": ["Web Design", "Directory Listing", "Local SEO"]
+      }
+    </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
-    <title>No Bluff Builds</title>
   </head>
   <body class="bg-nbb-cream text-nbb-green">
     <slot />
