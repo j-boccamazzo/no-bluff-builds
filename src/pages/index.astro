@@ -33,13 +33,16 @@ const tiers = [
 ---
 
 <Layout>
-  <!-- Nav -->
-  <nav class="px-6 py-4 flex justify-between items-center max-w-5xl mx-auto">
+<!-- Nav -->
+<nav class="px-6 py-4 flex justify-between items-center max-w-5xl mx-auto">
+  <div class="flex items-center gap-3">
+    <img src="/NBB-Logo-without-text.png" alt="No Bluff Builds" class="h-10 w-10" />
     <span class="font-display text-xl font-bold text-nbb-green">No Bluff Builds</span>
-    <a href="#book" class="bg-nbb-gold text-nbb-green font-semibold px-4 py-2 rounded-full text-sm hover:brightness-95 transition">
-      Book a chat
-    </a>
-  </nav>
+  </div>
+  <a href="#book" class="bg-nbb-gold text-nbb-green font-semibold px-4 py-2 rounded-full text-sm hover:brightness-95 transition">
+    Book a chat
+  </a>
+</nav>
 
   <!-- Hero -->
   <section class="px-6 py-24 max-w-5xl mx-auto">
@@ -139,21 +142,24 @@ const tiers = [
     </div>
   </section>
 
-  <!-- CTA -->
-  <section id="book" class="bg-nbb-green px-6 py-24">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-cream mb-4">
-        Ready to get found?
-      </h2>
-      <p class="text-nbb-cream/70 mb-8">
-        Book a free 20-minute chat. No pitch, no pressure — just a straight conversation about what would actually help your business.
-      </p>
-      <!-- Calendly embed will go here -->
-      <a href="#" class="inline-block bg-nbb-gold text-nbb-green font-bold px-8 py-4 rounded-full text-lg hover:brightness-95 transition">
-        Book a free chat →
-      </a>
+<!-- CTA -->
+<section id="book" class="bg-nbb-green px-6 py-24">
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-cream mb-4">
+      Ready to get found?
+    </h2>
+    <p class="text-nbb-cream/70 mb-8">
+      Book a free 20-minute chat. No pitch, no pressure — just a straight conversation about what would actually help your business.
+    </p>
+    <!-- Calendly inline embed -->
+    <div 
+      class="calendly-inline-widget rounded-2xl overflow-hidden" 
+      data-url="https://calendly.com/j-boccamazzo/no-bluff-call?hide_gdpr_banner=1&background_color=2c4539&text_color=fffdfa&primary_color=f8bd52"
+      style="min-width:320px;height:700px;">
     </div>
-  </section>
+    <script is:inline src="https://assets.calendly.com/assets/external/widget.js"></script>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer class="px-6 py-8 text-center text-nbb-green/50 text-sm">
