@@ -1,168 +1,448 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getTestimonials } from '../lib/airtable.js';
-
-const testimonials = await getTestimonials();
-
-const tiers = [
-  {
-    name: "Free Listing",
-    price: "$0",
-    description: "Get your business on the No Bluff Local directory. Locals searching for what you offer will find you.",
-    features: ["Basic directory presence", "Contact details & location", "Live within 48 hours"],
-    cta: "Claim your free listing",
-    highlight: false
-  },
-  {
-    name: "Managed Listing",
-    price: "$50/mth",
-    description: "We set it up and keep it looking sharp. You focus on running your business.",
-    features: ["Everything in Free", "Professional copy & photos", "We handle all updates", "Verified badge"],
-    cta: "Book a chat",
-    highlight: true
-  },
-  {
-    name: "Custom Website",
-    price: "From $500",
-    description: "Your own branded one-page site on your domain. Built to convert locals into customers.",
-    features: ["Everything in Managed", "Custom domain & branding", "Calendly or contact form", "Monthly maintenance"],
-    cta: "Book a chat",
-    highlight: false
-  }
-];
 ---
 
 <Layout>
+
 <!-- Nav -->
-<nav class="px-6 py-4 flex justify-between items-center max-w-5xl mx-auto">
-  <div class="flex items-center gap-3">
-    <img src="/NBB-Logo-without-text.png" alt="No Bluff Builds" class="h-10 w-10" />
-    <span class="font-display text-xl font-bold text-nbb-green">No Bluff Builds</span>
-  </div>
-  <a href="#book" class="bg-nbb-gold text-nbb-green font-semibold px-4 py-2 rounded-full text-sm hover:brightness-95 transition">
-    Book a chat
+<nav class="sticky top-0 z-50 bg-nbb-grey border-b border-nbb-green/15 flex items-center justify-between px-[6%] h-[68px]">
+  <a href="#" class="flex items-center gap-2.5">
+    <img src="/NBB-Logo-without-text.png" alt="No Bluff Builds" class="w-[38px] h-[38px]" />
+    <div class="font-display font-bold text-[13px] text-nbb-green leading-tight tracking-[0.02em]">
+      NO BLUFF BUILDS
+      <small class="block font-normal text-[10px] text-black tracking-[0.06em] uppercase">Part of No Bluff Local</small>
+    </div>
   </a>
+  <div class="hidden md:flex items-center gap-7">
+    <a href="#how" class="font-display font-semibold text-[13px] text-black tracking-[0.02em] hover:text-nbb-green transition-colors">How It Works</a>
+    <a href="#offerings" class="font-display font-semibold text-[13px] text-black tracking-[0.02em] hover:text-nbb-green transition-colors">Offerings</a>
+    <a href="#about" class="font-display font-semibold text-[13px] text-black tracking-[0.02em] hover:text-nbb-green transition-colors">About</a>
+  </div>
+  <a href="#cta" class="bg-nbb-green text-white font-display font-semibold text-[13px] px-6 py-3 rounded-lg border-2 border-black tracking-[0.02em] active:scale-95 transition-transform">Get Started</a>
 </nav>
 
-  <!-- Hero -->
-  <section class="px-6 py-24 max-w-5xl mx-auto">
-    <p class="text-nbb-teal font-semibold text-sm uppercase tracking-widest mb-4">Web presence for Great Southern businesses</p>
-    <h1 class="font-display text-5xl md:text-6xl font-bold text-nbb-green leading-tight mb-6 max-w-3xl">
-      Locals are searching for you.<br />Can they find you?
-    </h1>
-    <p class="text-lg text-nbb-green/70 max-w-xl mb-8">
-      Most Great Southern businesses have no web presence, or a terrible one. That's costing you customers every week. We fix that.
-    </p>
-    <a href="#book" class="inline-block bg-nbb-gold text-nbb-green font-bold px-8 py-4 rounded-full text-lg hover:brightness-95 transition">
-      Book a free chat →
-    </a>
-  </section>
-
-  <!-- Problem -->
-  <section class="bg-nbb-green px-6 py-20">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-cream mb-4">
-        A bad web presence is costing you customers.
-      </h2>
-      <p class="text-nbb-cream/70 text-lg max-w-2xl">
-        If someone in Albany searches for a plumber, a florist, or a yoga class and you don't show up, they go to your competitor. Not because you're worse. Because they couldn't find you.
-      </p>
-    </div>
-  </section>
-
-  <!-- Solution -->
-  <section class="px-6 py-24 max-w-5xl mx-auto">
-    <p class="text-nbb-teal font-semibold text-sm uppercase tracking-widest mb-4">The options</p>
-    <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-green mb-12">
-      Start where you're comfortable.
-    </h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      {tiers.map((tier) => (
-        <div class={`rounded-2xl p-8 flex flex-col ${tier.highlight ? 'bg-nbb-green text-nbb-cream' : 'bg-nbb-white text-nbb-green border border-nbb-green/10'}`}>
-          <div class="mb-6">
-            <p class={`text-sm font-semibold uppercase tracking-widest mb-2 ${tier.highlight ? 'text-nbb-gold' : 'text-nbb-teal'}`}>{tier.name}</p>
-            <p class={`font-display text-3xl font-bold mb-3 ${tier.highlight ? 'text-nbb-cream' : 'text-nbb-green'}`}>{tier.price}</p>
-            <p class={`text-sm ${tier.highlight ? 'text-nbb-cream/70' : 'text-nbb-green/70'}`}>{tier.description}</p>
-          </div>
-          <ul class="space-y-2 mb-8 flex-grow">
-            {tier.features.map((feature) => (
-              <li class={`text-sm flex items-center gap-2 ${tier.highlight ? 'text-nbb-cream/80' : 'text-nbb-green/80'}`}>
-                <span class={`text-lg ${tier.highlight ? 'text-nbb-gold' : 'text-nbb-teal'}`}>✓</span>
-                {feature}
-              </li>
-            ))}
-          </ul>
-          <a href="#book" class={`text-center font-semibold px-6 py-3 rounded-full text-sm transition ${tier.highlight ? 'bg-nbb-gold text-nbb-green hover:brightness-95' : 'border-2 border-nbb-green text-nbb-green hover:bg-nbb-green hover:text-nbb-cream'}`}>
-            {tier.cta}
-          </a>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="bg-nbb-white px-6 py-24">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-nbb-teal font-semibold text-sm uppercase tracking-widest mb-4">What locals are saying</p>
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-green mb-12">
-        Real businesses. Real results.
-      </h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        {testimonials.map((t) => (
-          <div class="bg-nbb-cream rounded-2xl p-8">
-            <p class="text-nbb-green/80 text-sm leading-relaxed mb-6">"{t.quote}"</p>
-            <div>
-              <p class="font-semibold text-nbb-green text-sm">{t.name}</p>
-              <p class="text-nbb-teal text-sm">{t.business}</p>
-            </div>
-          </div>
-        ))}
+<!-- Hero -->
+<div class="bg-nbb-white px-[6%] pt-10 pb-[60px]">
+  <div class="max-w-[1160px] mx-auto rounded-2xl overflow-hidden grid md:grid-cols-2 min-h-[420px] border-2 border-black">
+    <div class="bg-nbb-grey px-14 py-[60px] flex flex-col justify-center">
+      <span class="font-display font-semibold text-[11px] tracking-[0.12em] uppercase text-black mb-6 block">No Bluff Builds</span>
+      <h1 class="font-display font-extrabold text-[clamp(28px,3.2vw,44px)] text-nbb-green uppercase tracking-tight leading-[1.15] mb-[18px]">Your business, found by the people looking for it.</h1>
+      <p class="text-[17px] text-black leading-[1.7] mb-8 max-w-[420px]">Professional digital presence for Great Southern businesses. Built around what makes you worth choosing. Priced so the decision is easy.</p>
+      <div class="flex gap-3 flex-wrap">
+        <a href="#offerings" class="bg-nbb-green text-white font-display font-semibold text-[14px] px-6 py-3 rounded-lg border-2 border-black active:scale-95 transition-transform">See the Offerings</a>
+        <a href="#how" class="bg-nbb-gold text-black font-display font-semibold text-[14px] px-6 py-3 rounded-lg border-2 border-black active:scale-95 transition-transform">How It Works</a>
       </div>
     </div>
-  </section>
+    <div class="relative overflow-hidden bg-nbb-dark min-h-[240px]">
+      <svg viewBox="0 0 560 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" class="w-full h-full block">
+        <rect width="560" height="420" fill="#1a2e25"/>
+        <rect width="560" height="200" fill="#243d2f" opacity="0.6"/>
+        <circle cx="80" cy="50" r="1.2" fill="#f5e5bc" opacity="0.7"/>
+        <circle cx="180" cy="30" r="0.8" fill="#f5e5bc" opacity="0.5"/>
+        <circle cx="300" cy="60" r="1.4" fill="#f5e5bc" opacity="0.6"/>
+        <circle cx="420" cy="35" r="0.9" fill="#f5e5bc" opacity="0.55"/>
+        <circle cx="500" cy="65" r="1.2" fill="#f5e5bc" opacity="0.65"/>
+        <circle cx="350" cy="20" r="0.8" fill="#f5e5bc" opacity="0.5"/>
+        <circle cx="140" cy="80" r="1" fill="#f5e5bc" opacity="0.4"/>
+        <circle cx="480" cy="48" r="0.9" fill="#f5e5bc" opacity="0.6"/>
+        <circle cx="240" cy="15" r="1" fill="#f5e5bc" opacity="0.45"/>
+        <circle cx="52" cy="22" r="1.3" fill="#f5e5bc" opacity="0.55"/>
+        <circle cx="460" cy="55" r="28" fill="#f5e5bc" opacity="0.07"/>
+        <circle cx="460" cy="55" r="20" fill="#f5e5bc" opacity="0.1"/>
+        <circle cx="469" cy="49" r="15" fill="#1a2e25"/>
+        <path d="M0 260 L50 180 L110 230 L190 140 L260 200 L340 120 L410 175 L480 100 L560 155 L560 420 L0 420Z" fill="#223a2c" opacity="0.9"/>
+        <path d="M0 300 L70 230 L150 270 L230 195 L320 255 L400 185 L480 235 L560 210 L560 420 L0 420Z" fill="#2a4238"/>
+        <path d="M0 345 Q140 310 280 330 Q420 348 560 315 L560 420 L0 420Z" fill="#304e3e"/>
+        <rect y="365" width="560" height="55" fill="#38584a"/>
+        <ellipse cx="280" cy="295" rx="180" ry="25" fill="#f5bd60" opacity="0.06"/>
+        <rect x="35" y="305" width="5" height="60" fill="#1f3329"/>
+        <ellipse cx="37" cy="296" rx="16" ry="24" fill="#1f3329"/>
+        <rect x="22" y="320" width="4" height="45" fill="#1f3329"/>
+        <ellipse cx="24" cy="313" rx="12" ry="18" fill="#243d30"/>
+        <rect x="510" y="298" width="6" height="67" fill="#1f3329"/>
+        <ellipse cx="513" cy="287" rx="18" ry="26" fill="#1f3329"/>
+        <rect x="530" y="315" width="4" height="50" fill="#1f3329"/>
+        <ellipse cx="532" cy="308" rx="12" ry="18" fill="#243d30"/>
+        <rect x="400" y="320" width="4" height="45" fill="#243d30"/>
+        <ellipse cx="402" cy="312" rx="13" ry="19" fill="#243d30"/>
+        <rect y="400" width="560" height="4" fill="#f5bd60" opacity="0.3"/>
+        <circle cx="280" cy="210" r="50" fill="rgba(45,70,58,0.6)" stroke="rgba(245,189,96,0.2)" stroke-width="1"/>
+        <text x="280" y="230" font-family="Poppins,sans-serif" font-weight="700" font-size="52" fill="#f5bd60" opacity="0.75" text-anchor="middle">B</text>
+        <rect x="72" y="142" width="90" height="52" rx="8" fill="rgba(245,229,188,0.08)" stroke="rgba(245,189,96,0.15)" stroke-width="1"/>
+        <rect x="80" y="152" width="50" height="5" rx="2.5" fill="#f5bd60" opacity="0.35"/>
+        <rect x="80" y="162" width="70" height="3" rx="1.5" fill="#f5e5bc" opacity="0.15"/>
+        <rect x="80" y="170" width="58" height="3" rx="1.5" fill="#f5e5bc" opacity="0.1"/>
+        <rect x="398" y="156" width="90" height="52" rx="8" fill="rgba(245,229,188,0.08)" stroke="rgba(245,189,96,0.15)" stroke-width="1"/>
+        <rect x="406" y="166" width="50" height="5" rx="2.5" fill="#f5bd60" opacity="0.35"/>
+        <rect x="406" y="176" width="70" height="3" rx="1.5" fill="#f5e5bc" opacity="0.15"/>
+        <rect x="406" y="184" width="58" height="3" rx="1.5" fill="#f5e5bc" opacity="0.1"/>
+      </svg>
+    </div>
+  </div>
+</div>
 
-  <!-- How it works -->
-  <section class="px-6 py-24 max-w-5xl mx-auto">
-    <p class="text-nbb-teal font-semibold text-sm uppercase tracking-widest mb-4">The process</p>
-    <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-green mb-12">
-      Three steps, then done.
-    </h2>
-    <div class="grid md:grid-cols-3 gap-8">
+<!-- Stats bar -->
+<div class="bg-nbb-grey py-7 px-[6%]">
+  <div class="max-w-[1160px] mx-auto flex flex-wrap">
+    {[
+      { n: "7,000+", l: "Great Southern businesses" },
+      { n: "1,000+", l: "Engaged local readers" },
+      { n: "57%",    l: "Newsletter open rate" },
+      { n: "800+",   l: "Active directory listings" }
+    ].map((stat) => (
+      <div class="flex-1 text-center px-4 border-r border-nbb-green/15 last:border-r-0 py-2.5 md:py-0 min-w-[40%] md:min-w-0">
+        <span class="font-display font-bold text-[30px] text-nbb-green block">{stat.n}</span>
+        <span class="text-[13px] text-black tracking-[0.02em]">{stat.l}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<!-- Problem -->
+<section class="py-[72px] px-[6%] bg-nbb-white">
+  <div class="max-w-[1160px] mx-auto">
+    <div class="text-center mb-[52px]">
+      <span class="font-display font-semibold text-xs tracking-widest uppercase text-black block mb-3.5">The Problem</span>
+      <h2 class="font-display font-bold text-[clamp(24px,2.8vw,36px)] text-nbb-green leading-[1.2] mb-3.5">Most Great Southern businesses are invisible online.</h2>
+      <p class="text-[17px] text-black max-w-[580px] mx-auto leading-[1.7]">Not because they lack something worth showcasing. They just lack the tools, time, and expertise to present themselves properly.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
       {[
-        { step: "01", title: "Book a chat", desc: "We spend 20 minutes on the phone. I find out what you need and tell you exactly what I'd recommend." },
-        { step: "02", title: "We set it up", desc: "You send me your details and a few photos. I handle the rest — usually live within a week." },
-        { step: "03", title: "Locals find you", desc: "Your listing or site goes live. We check in after 30 days to see how it's going." }
-      ].map((item) => (
-        <div>
-          <p class="font-display text-5xl font-bold text-nbb-gold mb-4">{item.step}</p>
-          <h3 class="font-semibold text-nbb-green text-lg mb-2">{item.title}</h3>
-          <p class="text-nbb-green/70 text-sm leading-relaxed">{item.desc}</p>
+        { title: "The Facebook page that goes nowhere", body: "Set up in 20 minutes, updated twice, then abandoned. Invisible to anyone who isn't already following you." },
+        { title: "The Wix site they never finished", body: "Started with good intentions. Still on the placeholder text from 2022. No strategy, no copy that converts." },
+        { title: "The directory listing no one finds", body: "Name, phone, and a category that doesn't fit. Nothing that tells a customer why they should choose you." },
+        { title: "The agency that doesn't know the region", body: "Charges like a corporate client. Delivers templates. Doesn't know Mount Barker from Mount Lawley." }
+      ].map((card) => (
+        <div class="bg-nbb-grey rounded-xl px-[22px] py-7 border-2 border-black">
+          <p class="font-display font-bold text-[15px] text-black mb-2">{card.title}</p>
+          <p class="text-[14px] text-black leading-[1.6]">{card.body}</p>
         </div>
       ))}
     </div>
-  </section>
-
-<!-- CTA -->
-<section id="book" class="bg-nbb-green px-6 py-24">
-  <div class="max-w-2xl mx-auto text-center">
-    <h2 class="font-display text-3xl md:text-4xl font-bold text-nbb-cream mb-4">
-      Ready to get found?
-    </h2>
-    <p class="text-nbb-cream/70 mb-8">
-      Let's have a chat. No pitch, no pressure. Just 20 minutes to work out what'd actually help your business.
-    </p>
-    <!-- Calendly inline embed -->
-    <div 
-      class="calendly-inline-widget rounded-2xl overflow-hidden" 
-      data-url="https://calendly.com/j-boccamazzo/no-bluff-call?hide_gdpr_banner=1&background_color=2c4539&text_color=fffdfa&primary_color=f8bd52"
-      style="min-width:320px;height:700px;">
-    </div>
-    <script is:inline src="https://assets.calendly.com/assets/external/widget.js"></script>
   </div>
 </section>
 
-  <!-- Footer -->
-  <footer class="px-6 py-8 text-center text-nbb-green/50 text-sm">
-    <p>© 2025 No Bluff Builds · Part of <a href="https://noblufflocal.com" class="underline hover:text-nbb-green">No Bluff Local</a></p>
-  </footer>
+<!-- How It Works -->
+<section class="py-[72px] px-[6%] bg-nbb-white" id="how">
+  <div class="max-w-[1160px] mx-auto">
+    <div class="text-center mb-[52px]">
+      <span class="font-display font-semibold text-xs tracking-widest uppercase text-black block mb-3.5">How It Works</span>
+      <h2 class="font-display font-bold text-[clamp(24px,2.8vw,36px)] text-nbb-green leading-[1.2] mb-3.5">We start with a conversation. Then we build.</h2>
+      <p class="text-[17px] text-black max-w-[580px] mx-auto leading-[1.7]">Before anything gets built, we sit down and get to know your business. That conversation is where the real work happens.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      {[
+        { n: "1", title: "We get to know your business", body: "A conversation before anything else. We figure out who your best customers are and what makes you worth choosing. This is what most people skip. We don't." },
+        { n: "2", title: "We build around that clarity", body: "Your listing or website is built on the positioning work we did together. The copy sounds like you. Nothing generic, nothing templated." },
+        { n: "3", title: "You get more than you expected", body: "A professional presence you're proud to show people, plus a positioning summary capturing what makes your business worth choosing. Yours to keep." }
+      ].map((step) => (
+        <div class="text-center">
+          <div class="w-[72px] h-[72px] rounded-full bg-nbb-grey text-nbb-green font-display font-bold text-2xl flex items-center justify-center mx-auto mb-[22px] border-2 border-black">{step.n}</div>
+          <h3 class="font-display font-semibold text-[17px] text-black mb-2.5">{step.title}</h3>
+          <p class="text-[15px] text-black">{step.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Offerings -->
+<section class="py-[72px] px-[6%] bg-nbb-white" id="offerings">
+  <div class="max-w-[1160px] mx-auto">
+    <div class="text-center mb-[52px]">
+      <span class="font-display font-semibold text-xs tracking-widest uppercase text-black block mb-3.5">The Offerings</span>
+      <h2 class="font-display font-bold text-[clamp(24px,2.8vw,36px)] text-nbb-green leading-[1.2] mb-3.5">Two products. One ecosystem.</h2>
+      <p class="text-[17px] text-black max-w-[580px] mx-auto leading-[1.7]">Start with a listing. Add a website when you're ready. Everything connects to No Bluff Local's growing audience.</p>
+    </div>
+
+    <div class="flex justify-center mb-12">
+      <div class="flex border-2 border-black rounded-lg overflow-hidden">
+        <button class="otab font-display font-semibold text-[13px] px-8 py-3 border-none bg-nbb-grey cursor-pointer text-black tracking-[0.06em] uppercase transition-all active" onclick="showTab('list',this)">Directory Listings</button>
+        <button class="otab font-display font-semibold text-[13px] px-8 py-3 border-none bg-nbb-grey cursor-pointer text-black tracking-[0.06em] uppercase transition-all" onclick="showTab('web',this)">Website Builds</button>
+      </div>
+    </div>
+
+    <!-- Tab: Directory Listings -->
+    <div class="tab-p active" id="tab-list">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Free Listing -->
+        <div class="bg-nbb-white border-2 border-black rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all">
+          <div class="px-7 pt-8 pb-5 bg-nbb-grey">
+            <div class="font-display font-semibold text-xs tracking-widest uppercase text-nbb-green mb-3">Free Listing</div>
+            <div class="font-display font-bold text-[36px] text-black leading-none">$0</div>
+            <div class="text-[13px] text-black mt-1.5">Always free</div>
+          </div>
+          <div class="px-7 py-6">
+            <p class="text-[14px] text-black mb-5 leading-[1.6]">Get your business on the No Bluff Local directory. Self-serve, no discovery call, no frills.</p>
+            <ul class="mb-7">
+              {[
+                { check: true,  text: "Basic listing (name, category, contact)" },
+                { check: true,  text: "Appears in the directory" },
+                { check: false, text: "No discovery call" },
+                { check: false, text: "No copy work or customisation" },
+                { check: false, text: "No CTA or lead generation tools" }
+              ].map((item) => (
+                <li class="text-[14px] text-black py-[7px] flex items-start gap-2.5 border-b border-nbb-grey last:border-b-0">
+                  <span class={`font-bold flex-shrink-0 leading-[1.5] ${item.check ? 'text-nbb-green' : 'text-nbb-grey'}`}>{item.check ? '✓' : '—'}</span>
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+            <a href="https://www.noblufflocal.com/submit-listing" class="block text-center font-display font-semibold text-[14px] px-6 py-3 rounded-lg bg-nbb-grey border-2 border-black text-black active:scale-95 transition-transform">Submit a Free Listing</a>
+          </div>
+        </div>
+
+        <!-- Standard Listing -->
+        <div class="bg-nbb-white border-2 border-black rounded-2xl overflow-hidden relative hover:-translate-y-1 hover:shadow-xl transition-all">
+          <span class="absolute top-0 left-1/2 -translate-x-1/2 bg-nbb-gold text-nbb-green font-display font-bold text-[10px] tracking-[0.1em] uppercase px-[18px] py-1.5 rounded-b-xl">Most Popular</span>
+          <div class="px-7 pt-8 pb-5 bg-nbb-grey">
+            <div class="font-display font-semibold text-xs tracking-widest uppercase text-nbb-green mb-3">Standard Listing</div>
+            <div class="font-display font-bold text-[36px] text-black leading-none">$199 <span class="text-[14px] font-normal text-black">setup</span></div>
+            <div class="text-[13px] text-black mt-1.5">Then $99/year to renew</div>
+          </div>
+          <div class="px-7 py-6">
+            <p class="text-[14px] text-black mb-5 leading-[1.6]">A properly built listing that sounds like your business and turns visitors into enquiries.</p>
+            <ul class="mb-7">
+              {[
+                "Discovery call included",
+                "Full copy rewrite",
+                "Personalised banner + photo gallery",
+                "CTA connected to desired action",
+                "Verification badge + backlink",
+                "Up to 3 testimonials",
+                "Schema.org SEO markup",
+                "Above free listings in search"
+              ].map((item) => (
+                <li class="text-[14px] text-black py-[7px] flex items-start gap-2.5 border-b border-nbb-grey last:border-b-0">
+                  <span class="text-nbb-green font-bold flex-shrink-0 leading-[1.5]">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <a href="mailto:joshua.j.boccamazzo@gmail.com?subject=Standard%20Listing%20Enquiry" class="block text-center font-display font-semibold text-[14px] px-6 py-3 rounded-lg bg-nbb-green text-white active:scale-95 transition-transform">Get Started</a>
+          </div>
+        </div>
+
+        <!-- Premium Listing -->
+        <div class="bg-nbb-white border-2 border-black rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all">
+          <div class="px-7 pt-8 pb-5 bg-nbb-grey">
+            <div class="font-display font-semibold text-xs tracking-widest uppercase text-nbb-green mb-3">Premium Listing</div>
+            <div class="font-display font-bold text-[36px] text-black leading-none">$399 <span class="text-[14px] font-normal text-black">setup</span></div>
+            <div class="text-[13px] text-black mt-1.5">Then $199/year to renew</div>
+          </div>
+          <div class="px-7 py-6">
+            <p class="text-[14px] text-black mb-5 leading-[1.6]">Everything in Standard, plus deeper analytics, more social proof, and the full owner story.</p>
+            <ul class="mb-7">
+              {[
+                "Everything in Standard",
+                "Business owner profile",
+                "Up to 5 testimonials",
+                "Traffic analytics dashboard",
+                "Priority placement in directory",
+                "Quarterly check-in call"
+              ].map((item) => (
+                <li class="text-[14px] text-black py-[7px] flex items-start gap-2.5 border-b border-nbb-grey last:border-b-0">
+                  <span class="text-nbb-green font-bold flex-shrink-0 leading-[1.5]">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <a href="mailto:joshua.j.boccamazzo@gmail.com?subject=Premium%20Listing%20Enquiry" class="block text-center font-display font-semibold text-[14px] px-6 py-3 rounded-lg bg-nbb-grey border-2 border-black text-black active:scale-95 transition-transform">Get Started</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab: Website Builds -->
+    <div class="tab-p" id="tab-web">
+      <div class="bg-nbb-grey rounded-2xl p-14 grid md:grid-cols-[3fr_2fr] gap-16 items-start">
+        <div>
+          <span class="font-display font-semibold text-xs tracking-widest uppercase text-black mb-3.5 block">One-Page Website Build</span>
+          <h3 class="font-display font-semibold text-[clamp(22px,2.4vw,30px)] text-nbb-green mb-4 leading-[1.25]">A website built around what makes your business worth choosing.</h3>
+          <p class="text-[16px] text-black mb-7 leading-[1.7]">Not a template. Not a DIY tool. A proper build with real thinking behind it. We figure out your positioning first, then build something that says it clearly.</p>
+          <ul>
+            {[
+              "Discovery session and positioning work",
+              "Positioning summary document, yours to keep",
+              "One-page site, copy written for you",
+              "Mobile optimised, fast-loading, built to last",
+              "Google My Business setup or optimisation",
+              "Google Analytics connected",
+              "Verification badge linking back to your No Bluff listing",
+              "First 12 months on the care plan included"
+            ].map((item) => (
+              <li class="text-[15px] text-black py-[9px] flex items-start gap-3 border-b border-nbb-green/15 last:border-b-0">
+                <span class="text-nbb-green font-bold flex-shrink-0 mt-0.5">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <div class="bg-nbb-green rounded-2xl p-9 text-center">
+            <span class="font-display font-bold text-[11px] tracking-[0.12em] uppercase text-nbb-gold mb-3 block">One-Page Website Build</span>
+            <div class="font-display font-bold text-[56px] text-white leading-none">$999</div>
+            <div class="text-[13px] text-nbb-teal mt-1.5 mb-7">Includes first year care plan</div>
+            <a href="mailto:joshua.j.boccamazzo@gmail.com?subject=Website%20Build%20Enquiry" class="block text-center font-display font-semibold text-[14px] px-6 py-3 rounded-lg bg-nbb-gold text-black border-2 border-black active:scale-95 transition-transform mb-5">Book a Discovery Session</a>
+            <div class="bg-nbb-gold/10 border border-nbb-gold/25 rounded-xl p-5 text-left mb-4">
+              <span class="font-display font-bold text-[11px] tracking-[0.1em] uppercase text-nbb-gold mb-2 block">Website Care Plan</span>
+              <p class="text-[13px] text-nbb-teal leading-[1.6]"><strong class="text-white">$299/year</strong> from year two. Hosting, security, up to 4 content updates, annual review call, priority support. You run the business. We keep the site working.</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-left">
+              <p class="text-[13px] text-nbb-teal leading-[1.6]"><strong class="text-white">Agency services</strong> also available. Larger builds, SEO, social media management, growth strategy. Custom pricing. Get in touch.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Ecosystem Advantage -->
+<section class="py-[72px] px-[6%] bg-nbb-white">
+  <div class="max-w-[1160px] mx-auto">
+    <div class="text-center mb-[52px]">
+      <span class="font-display font-semibold text-xs tracking-widest uppercase text-black block mb-3.5">The Ecosystem Advantage</span>
+      <h2 class="font-display font-bold text-[clamp(24px,2.8vw,36px)] text-nbb-green leading-[1.2] mb-3.5">No outside agency can offer this.</h2>
+      <p class="text-[17px] text-black max-w-[580px] mx-auto leading-[1.7]">No Bluff Builds sits inside the No Bluff Local ecosystem. Your listing or website connects to an audience that's already here and growing.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {[
+        { n: "1,000+", title: "No Bluff News", body: "A weekly newsletter reaching engaged Great Southern locals with a 57% open rate. When you're ready to reach more people, the audience is already there." },
+        { n: "800+",   title: "No Bluff Directory", body: "The most comprehensive directory of Great Southern businesses. Your listing sits inside a trusted, growing resource that locals actually use to find services." },
+        { n: "1,500+", title: "No Bluff Social", body: "An active and growing social presence across Instagram and Facebook. Positive, community-focused, and connected to every story and listing we publish." }
+      ].map((card) => (
+        <div class="bg-nbb-grey rounded-2xl p-9 border-2 border-black">
+          <span class="font-display font-bold text-[42px] text-nbb-green leading-none mb-2 block">{card.n}</span>
+          <h3 class="font-display font-semibold text-[17px] text-black mb-2.5">{card.title}</h3>
+          <p class="text-[14px] text-black leading-[1.65]">{card.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Who Is This For -->
+<section class="py-[72px] px-[6%] bg-nbb-white">
+  <div class="max-w-[1160px] mx-auto">
+    <div class="text-center mb-[52px]">
+      <span class="font-display font-semibold text-xs tracking-widest uppercase text-black block mb-3.5">Who Is This For</span>
+      <h2 class="font-display font-bold text-[clamp(24px,2.8vw,36px)] text-nbb-green leading-[1.2]">Built for Great Southern businesses at every stage.</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-nbb-green rounded-2xl p-10">
+        <span class="font-display font-semibold text-xs tracking-widest uppercase text-white mb-3.5 block">Growing Independent</span>
+        <h3 class="font-display font-semibold text-[22px] text-nbb-gold mb-3">You've made the bet on yourself. Now you need to be found.</h3>
+        <p class="text-[15px] text-white mb-5 leading-[1.6]">You're a tradie, a health professional, a specialist service provider. You're good at what you do. You just need the digital side sorted so the right customers find you.</p>
+        <ul class="space-y-1.5">
+          {[
+            "Recently gone out on your own",
+            `Told to "get online" but not sure how`,
+            "Limited runway, need customers now",
+            "Want something you're proud to show people"
+          ].map((item) => (
+            <li class="text-[15px] text-nbb-gold flex gap-2.5">
+              <span class="text-nbb-gold font-bold flex-shrink-0">&rarr;</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="rounded-2xl p-10 bg-nbb-grey border-2 border-black">
+        <span class="font-display font-semibold text-xs tracking-widest uppercase text-black mb-3.5 block">Established Local Business</span>
+        <h3 class="font-display font-semibold text-[22px] text-nbb-green mb-3">You're well known locally. You want to stay that way.</h3>
+        <p class="text-[15px] text-black mb-5 leading-[1.6]">You've been in the Great Southern for years. Your reputation is strong. But your digital presence doesn't reflect the quality of what you actually do.</p>
+        <ul class="space-y-1.5">
+          {[
+            "Referral-dependent and ready to grow",
+            "Website is outdated or doesn't exist",
+            "Need to be visible to new Great Southern residents",
+            "Want to build on what you've built"
+          ].map((item) => (
+            <li class="text-[15px] text-black flex gap-2.5">
+              <span class="text-black font-bold flex-shrink-0">&rarr;</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Josh -->
+<section class="py-[72px] px-[6%] bg-nbb-white" id="about">
+  <div class="max-w-[1160px] mx-auto grid md:grid-cols-[260px_1fr] gap-20 items-center">
+    <div class="flex flex-col items-center text-center">
+      <div class="w-[140px] h-[140px] rounded-full bg-nbb-gold text-nbb-green font-display font-bold text-[40px] flex items-center justify-center mb-6 border-4 border-nbb-gold/25">JB</div>
+      <ul class="text-left w-full">
+        {[
+          "Albany born and raised",
+          "Monitor Deloitte strategy consulting",
+          "Corporate venture capital ($170M fund)",
+          "Scaling technology companies"
+        ].map((item) => (
+          <li class="text-[13px] text-black flex items-start gap-2 py-1.5">
+            <div class="w-1.5 h-1.5 rounded-full bg-nbb-green flex-shrink-0 mt-[7px]"></div>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <span class="font-display font-semibold text-xs tracking-widest uppercase text-black block mb-3.5">About Josh</span>
+      <h2 class="font-display font-bold text-[clamp(24px,2.8vw,36px)] text-nbb-green leading-[1.2] mb-3.5">Built by someone who actually knows what it takes to grow a business.</h2>
+      <p class="text-[16px] text-black leading-[1.75] mb-[18px]">I'm Josh Boccamazzo. I grew up in Albany and spent a decade in strategy consulting, corporate venture capital, and scaling technology companies before coming back to build something meaningful for this region.</p>
+      <p class="text-[16px] text-black leading-[1.75] mb-[18px]">No Bluff Builds is not a web design service. It's a business clarity service that produces a digital deliverable. <strong class="text-black">Before I build anything, I sit down and get to know your business.</strong> That conversation is what makes the difference between something that works and something that just sits there.</p>
+      <p class="text-[16px] text-black leading-[1.75]">No one else doing web builds in the Great Southern has that background. And no one else is connected to the audience, the directory, and the newsletter that No Bluff Local has built.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="bg-nbb-white py-[72px] px-[6%] text-center" id="cta">
+  <div class="max-w-[1160px] mx-auto">
+    <span class="font-display font-semibold text-xs tracking-widest uppercase text-black block mb-3.5">Get Started</span>
+    <h2 class="font-display font-bold text-[clamp(24px,2.8vw,36px)] text-nbb-green leading-[1.2] mb-3.5">Ready to be found by the locals looking for you?</h2>
+    <p class="text-[17px] text-black max-w-[580px] mx-auto leading-[1.7] mb-9">Pick the right starting point. Not sure? Get in touch and we'll figure it out.</p>
+    <div class="flex gap-4 justify-center flex-wrap">
+      <a href="https://www.noblufflocal.com/submit-listing" class="bg-nbb-green text-white font-display font-semibold text-[14px] px-6 py-3 rounded-lg active:scale-95 transition-transform">Submit a Free Listing</a>
+      <a href="mailto:joshua.j.boccamazzo@gmail.com?subject=Paid%20Listing%20Enquiry" class="bg-nbb-gold text-black border-2 border-black font-display font-semibold text-[14px] px-6 py-3 rounded-lg active:scale-95 transition-transform">Get a Paid Listing</a>
+      <a href="mailto:joshua.j.boccamazzo@gmail.com?subject=Website%20Build%20Enquiry" class="bg-nbb-gold text-black border-2 border-black font-display font-semibold text-[14px] px-6 py-3 rounded-lg active:scale-95 transition-transform">Book a Website Session</a>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-nbb-grey py-9 px-[6%]">
+  <div class="max-w-[1160px] mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
+    <div class="text-center md:text-left">
+      <span class="font-display font-bold text-[14px] text-nbb-green">NO BLUFF BUILDS</span>
+      <small class="block font-normal text-[11px] text-black mt-0.5 tracking-[0.04em]">Part of the No Bluff Local ecosystem - noblufflocal.com</small>
+    </div>
+    <div class="flex gap-6">
+      <a href="https://www.noblufflocal.com" class="text-[14px] text-black">noblufflocal.com</a>
+      <a href="mailto:joshua.j.boccamazzo@gmail.com" class="text-[14px] text-black">Get in touch</a>
+    </div>
+  </div>
+</footer>
+
+<style is:inline>
+  .tab-p { display: none; }
+  .tab-p.active { display: block; }
+  .otab.active { background: #2c4539; color: white; }
+</style>
+
+<script is:inline>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-p').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.otab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
 </Layout>

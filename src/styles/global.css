@@ -4,9 +4,12 @@
   --color-nbb-green: #2c4539;
   --color-nbb-gold: #f8bd52;
   --color-nbb-cream: #f3e2ba;
+  --color-nbb-cream-bg: #f4f0e6;
   --color-nbb-teal: #709395;
   --color-nbb-white: #fffdfa;
+  --color-nbb-grey: #d4dcda;
+  --color-nbb-dark: #1a2e25;
 
-  --font-display: "Playfair Display", Georgia, serif;
+  --font-display: "Poppins", system-ui, sans-serif;
   --font-sans: "Source Sans 3", system-ui, sans-serif;
 }
